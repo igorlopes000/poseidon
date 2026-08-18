@@ -257,7 +257,7 @@ export const SUGESTOES_MIX: Record<Categoria, SugestaoMix[]> = {
   ],
 };
 
-export const HISTORICO_BASE: Record<string, VisitaHistorico> = {
+export const HISTORICO_BASE = {
   retorno: {
     data: "14/08/2026",
     titulo: "Retorno agendado",
