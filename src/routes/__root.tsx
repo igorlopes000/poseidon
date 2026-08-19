@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AppSidebar } from "@/components/poseidon/app-sidebar";
+import { Toaster } from "@/components/ui/sonner";
+import { PoseidonProvider } from "@/state/poseidon-store";
 
 function NotFoundComponent() {
   return (
