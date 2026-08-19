@@ -482,7 +482,7 @@ export const NEGOCIACOES_INICIAIS: Negociacao[] = [
     oferta: "Ação Mix Inteligente",
     valor: 3020,
     dataRetirada: "26/08/2026",
-    status: "Em negociação",
+    status: "Promessa registrada",
     observacao: "Substituição de itens fora do CD em avaliação.",
     itens: "Mix",
   },
