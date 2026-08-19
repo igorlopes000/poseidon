@@ -10,11 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as MetasRouteImport } from './routes/metas'
 import { Route as RotaDoDiaRouteImport } from './routes/rota-do-dia'
+import { Route as PdvsIndexRouteImport } from './routes/pdvs.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetasRoute = MetasRouteImport.update({
+  id: '/metas',
+  path: '/metas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RotaDoDiaRoute = RotaDoDiaRouteImport.update({
@@ -22,31 +29,44 @@ const RotaDoDiaRoute = RotaDoDiaRouteImport.update({
   path: '/rota-do-dia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PdvsIndexRoute = PdvsIndexRouteImport.update({
+  id: '/pdvs/',
+  path: '/pdvs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/metas': typeof MetasRoute
   '/rota-do-dia': typeof RotaDoDiaRoute
+  '/pdvs/': typeof PdvsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/metas': typeof MetasRoute
   '/rota-do-dia': typeof RotaDoDiaRoute
+  '/pdvs': typeof PdvsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/metas': typeof MetasRoute
   '/rota-do-dia': typeof RotaDoDiaRoute
+  '/pdvs/': typeof PdvsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/rota-do-dia'
+  fullPaths: '/' | '/metas' | '/rota-do-dia' | '/pdvs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/rota-do-dia'
-  id: '__root__' | '/' | '/rota-do-dia'
+  to: '/' | '/metas' | '/rota-do-dia' | '/pdvs'
+  id: '__root__' | '/' | '/metas' | '/rota-do-dia' | '/pdvs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MetasRoute: typeof MetasRoute
   RotaDoDiaRoute: typeof RotaDoDiaRoute
+  PdvsIndexRoute: typeof PdvsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +78,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/metas': {
+      id: '/metas'
+      path: '/metas'
+      fullPath: '/metas'
+      preLoaderRoute: typeof MetasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rota-do-dia': {
       id: '/rota-do-dia'
       path: '/rota-do-dia'
@@ -65,12 +92,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RotaDoDiaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pdvs/': {
+      id: '/pdvs/'
+      path: '/pdvs'
+      fullPath: '/pdvs/'
+      preLoaderRoute: typeof PdvsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MetasRoute: MetasRoute,
   RotaDoDiaRoute: RotaDoDiaRoute,
+  PdvsIndexRoute: PdvsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
