@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RotaDoDiaRouteImport } from './routes/rota-do-dia'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RotaDoDiaRoute = RotaDoDiaRouteImport.update({
+  id: '/rota-do-dia',
+  path: '/rota-do-dia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/rota-do-dia': typeof RotaDoDiaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/rota-do-dia': typeof RotaDoDiaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/rota-do-dia': typeof RotaDoDiaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/rota-do-dia'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/rota-do-dia'
+  id: '__root__' | '/' | '/rota-do-dia'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RotaDoDiaRoute: typeof RotaDoDiaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rota-do-dia': {
+      id: '/rota-do-dia'
+      path: '/rota-do-dia'
+      fullPath: '/rota-do-dia'
+      preLoaderRoute: typeof RotaDoDiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RotaDoDiaRoute: RotaDoDiaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
